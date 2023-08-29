@@ -6,7 +6,7 @@ from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> float:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
     Asynchronous function that takes in an integer argument that waits
     for a random delay and then returns a list of all the delays.
