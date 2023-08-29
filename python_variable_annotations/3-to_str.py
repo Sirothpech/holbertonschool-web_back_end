@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 """
 This module contians a function that returns the string
 representation of a float.
@@ -7,7 +7,7 @@ representation of a float.
 
 def to_str(n: float) -> str:
     """
-    Convert the string representation of a float.
+    Return the string representation of a float.
 
     Args:
         n (float): The input float.
