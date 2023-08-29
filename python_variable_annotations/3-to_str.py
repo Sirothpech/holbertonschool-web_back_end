@@ -7,7 +7,7 @@ representation of a float.
 
 def to_str(n: float) -> str:
     """
-    Returns the string representation of a float.
+    Convert the string representation of a float.
 
     Args:
         n (float): The input float.
