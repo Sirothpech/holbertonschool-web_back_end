@@ -14,7 +14,5 @@ async def async_comprehension() -> List[float]:
     Yields:
         Generator[float, None, None]: [description]
     """
-    numbers = []
-    async for num in async_generator():
-        numbers.append(num)
-    return numbers
+
+    return [num async for num in async_generator()]
