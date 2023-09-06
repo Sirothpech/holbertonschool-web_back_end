@@ -3,3 +3,8 @@
 NoSQL/dump.zip
 NoSQL/dump/logs/nginx.bson
 NoSQL/dump/logs/nginx.metadata.json
+pagination/1-main.py
+pagination/Popular_Baby_Names.csv
+.gitignore
+pagination/3-main.py
+pagination/2-main.py
