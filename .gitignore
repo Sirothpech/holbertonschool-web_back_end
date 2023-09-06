@@ -1,2 +1,5 @@
 *.pyc
 0-main.py
+NoSQL/dump.zip
+NoSQL/dump/logs/nginx.bson
+NoSQL/dump/logs/nginx.metadata.json
