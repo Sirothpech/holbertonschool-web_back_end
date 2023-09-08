@@ -57,7 +57,9 @@ class Server:
         next_index = current_index + page_size
 
         # Get the current page data
-        page_data = [indexed_data[i] for i in range(current_index, next_index) if i in indexed_data]
+        page_data = [indexed_data[i]
+                     for i in range(current_index, next_index)
+                     if i in indexed_data]
 
         # Calculate the total number of pages
         total_pages = math.ceil(len(indexed_data) / page_size)
@@ -65,7 +67,8 @@ class Server:
         # Create the hypermedia page dictionary
         hypermedia_page = {
             "index": current_index,
-            "next_index": next_index if next_index < len(indexed_data) else None,
+            "next_index": next_index
+            if next_index < len(indexed_data) else None,
             "page_size": page_size,
             "data": page_data,
             "total_pages": total_pages
