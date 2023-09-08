@@ -19,15 +19,34 @@ def index_range(page: int, page_size: int) -> tuple:
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
     """
+    Server class to paginate a database of popular baby names.
+
+    Attributes:
+        DATA_FILE (str): The file path of the dataset containing
+        popular baby names.
+
+    Methods:
+        dataset() -> List[List]: Returns the cached dataset of baby names.
+        get_page(page: int = 1, page_size: int = 10) -> List[List]: Retrieves
+        a specific page of data from the dataset based
+        on the given page number and page size.
+        get_hyper(page: int = 1, page_size: int = 10) -> Dict: Retrieves
+        a specific page of data from the dataset based on the given page
+        number and page size, along with pagination information.
+    """
+
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
+        """
+        Returns the cached dataset of baby names.
+
+        Returns:
+            List[List]: The dataset of baby names.
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
@@ -38,35 +57,51 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        # Vérifier que page et page_size sont des entiers positifs
+        """
+        Retrieves a specific page of data from the dataset based on
+        the given page number and page size.
+
+        Args:
+            page (int, optional): The page number to retrieve. Defaults to 1.
+            page_size (int, optional): The number of records per page.
+            Defaults to 10.
+
+        Returns:
+            List[List]: The data of the specified page.
+        """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
-        # Récupérer les données
         data = self.dataset()
 
-        # Utiliser index_range pour obtenir les indices de début et de fin
         start_index, end_index = index_range(page, page_size)
 
-        # Extraire la page de données
         page_data = data[start_index:end_index]
 
         return page_data
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        # Vérifier que page et page_size sont des entiers positifs
+        """
+        Retrieves a specific page of data from the dataset based on the given
+        page number and page size, along with pagination information.
+
+        Args:
+            page (int, optional): The page number to retrieve. Defaults to 1.
+            page_size (int, optional): The number of records per page.
+            Defaults to 10.
+
+        Returns:
+            Dict: A dictionary containing the page data and
+            pagination information.
+        """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
-        # Calculer les index de début et de fin pour la pagination
         start, end = index_range(page, page_size)
         dataset = self.dataset()
 
-        # Calculer le nombre total de pages dans le dataset
         total_pages = math.ceil(len(dataset) / page_size)
 
-        # Si la pagination commence après la fin du dataset,
-        # retourner une page vide
         if start >= len(dataset):
             return {
                 'page_size': page_size,
@@ -77,14 +112,11 @@ class Server:
                 'total_pages': total_pages
             }
 
-        # Extraire les données de la page actuelle
         data = dataset[start:end]
 
-        # Calculer les numéros de page précédente et suivante
         prev_page = page - 1 if page > 1 else None
         next_page = page + 1 if page < total_pages else None
 
-        # Créer un dictionnaire contenant les informations de pagination
         return {
             'page_size': page_size,
             'page': page,
