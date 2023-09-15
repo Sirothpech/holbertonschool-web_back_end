@@ -30,6 +30,6 @@ export default class car {
   }
 
   cloneCar() {
-    return new car(this.brand, this.motor, this.color);
+    return new this.constructor(this.brand, this.motor, this.color);
   }
 }
