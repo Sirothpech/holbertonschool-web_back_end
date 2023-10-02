@@ -16736,3 +16736,6 @@ ES6_basic/node_modules/write/index.js
 ES6_basic/node_modules/write/LICENSE
 ES6_basic/node_modules/write/package.json
 ES6_basic/node_modules/write/README.md
+ES6_promise/node_modules/@ampproject/remapping/package.json
+ES6_promise/node_modules/
+node_modules/
