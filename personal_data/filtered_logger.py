@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-3. Connect to secure database
+4. Read and filter data
 """
 
 import re
@@ -119,3 +119,27 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     )
 
     return connection
+
+
+def main():
+    """Main function to read and filter data."""
+    # Configure the logger with the RedactingFormatter
+    logger = get_logger()
+
+    # Connect to the database
+    db = get_db()
+    cursor = db.cursor()
+
+    # Execute the query
+    cursor.execute("SELECT * FROM users;")
+
+    # Log the results
+    for row in cursor:
+        logger.info(row)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
