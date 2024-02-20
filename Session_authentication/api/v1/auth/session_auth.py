@@ -7,16 +7,16 @@ from api.v1.auth.auth import Auth
 
 class SessionAuth(Auth):
     """
-    SessionAuth Class
+    Create a session ID for a user.
 
-    This class inherits from the Auth class and is intended for creating a new
-    authentication mechanism based on sessions.
+    Args:
+        user_id (str): The user ID for which the session is created.
 
-    Methods:
-        (No additional methods for now)
+    Returns:
+        str: The generated session ID.
 
-    Attributes:
-        (No additional attributes for now)
+    Notes:
+        - Returns None if user_id is None or not a string.
     """
     user_id_by_session_id = {}
 
