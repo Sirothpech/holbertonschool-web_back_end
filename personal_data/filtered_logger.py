@@ -4,7 +4,7 @@
 """
 
 import re
-from typing import List
+from typing import List, Tuple
 import logging
 
 
@@ -72,7 +72,10 @@ class RedactingFormatter(logging.Formatter):
                                         log_message, self.SEPARATOR)
         return filtered_message
 
-PII_FIELDS: List[str] = ["name", "email", "phone", "ssn", "password"]
+
+PII_FIELDS: Tuple[str, str, str, str, str] = ("name", "email",
+                                              "phone", "ssn", "password")
+
 
 def get_logger() -> logging.Logger:
     """Create and configure a logger.
@@ -83,6 +86,7 @@ def get_logger() -> logging.Logger:
     """
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
+    logger.propagate = False
 
     formatter = RedactingFormatter(fields=PII_FIELDS)
     stream_handler = logging.StreamHandler()
