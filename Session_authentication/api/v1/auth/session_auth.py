@@ -6,30 +6,13 @@ from api.v1.auth.auth import Auth
 
 
 class SessionAuth(Auth):
-    """
-    Class to manage session-based authentication.
-
-    Inherits from the Auth class.
-
-    Attributes:
-        user_id_by_session_id (dict): A dictionary to store the
-        mapping of session IDs to user IDs.
-
-    Methods:
-        create_session(user_id: str = None) -> str:
-            Creates a session ID for a user and stores the mapping
-            in the user_id_by_session_id dictionary.
-
-            Args:
-                user_id (str): The ID of the user. Defaults to None.
-
-            Returns:
-                str: The generated session ID.
-
+    """Class to manage session-based authentication.
     """
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
+        """Create a session ID for a user.
+        """
         if user_id is None or type(user_id) is not str:
             return None
 
