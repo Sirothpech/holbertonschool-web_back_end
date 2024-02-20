@@ -4,3 +4,4 @@
 ## Caching
 ## Personal data
 ## Basic authentication
+## Session authentication
