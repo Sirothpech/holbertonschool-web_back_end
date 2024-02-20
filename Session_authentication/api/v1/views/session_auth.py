@@ -2,10 +2,12 @@
 """
 Session authentication view for handling login requests.
 """
-from flask import Flask, jsonify, request, make_response
+import os
+from flask import Flask, jsonify, request
 from api.v1.views import app_views
+from api.v1.auth.session_auth import SessionAuth
 from models.user import User
-from api.v1.app import auth
+
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def session_auth_login() -> str:
@@ -31,10 +33,10 @@ def session_auth_login() -> str:
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
 
+    from api.v1.app import auth
     session_id = auth.create_session(user.id)
-    user_json = user.to_json()
-
-    response = jsonify(user_json)
-    response.set_cookie(auth.session_cookie_name, session_id)
+    cookie_name = os.getenv("SESSION_NAME")
+    response = jsonify(user.to_json())
+    response.set_cookie(cookie_name, session_id)
 
     return response
