@@ -6,17 +6,7 @@ from api.v1.auth.auth import Auth
 
 
 class SessionAuth(Auth):
-    """
-    Create a session ID for a user.
-
-    Args:
-        user_id (str): The user ID for which the session is created.
-
-    Returns:
-        str: The generated session ID.
-
-    Notes:
-        - Returns None if user_id is None or not a string.
+    """Create a session ID for a user.
     """
     user_id_by_session_id = {}
 
