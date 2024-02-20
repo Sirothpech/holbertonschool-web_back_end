@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Module to manage the API authentication
 """
+import os
 from flask import request
 from typing import List, TypeVar
 
@@ -30,3 +31,27 @@ class Auth:
         """ Current user
         """
         return None
+
+    def session_cookie(self, request=None) -> str:
+        """ Session cookie value from request
+
+        Args:
+            request: The Flask request object.
+
+        Returns:
+            str: The value of the session cookie, or None if not found.
+
+        Notes:
+            - Uses .get() built-in for accessing the cookie
+            in the request cookies dictionary.
+            - The name of the cookie is defined by the environment
+            variable SESSION_NAME.
+        """
+        if request is None:
+            return None
+
+        # Get the session name from the environment variable
+        session_name = os.getenv("SESSION_NAME", "_my_session_id")
+
+        # Return the value of the session cookie
+        return request.cookies.get(session_name)
