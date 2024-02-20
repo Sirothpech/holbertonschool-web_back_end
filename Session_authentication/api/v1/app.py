@@ -3,6 +3,7 @@
 Route module for the API
 """
 from os import getenv
+from api.v1.auth.session_auth import SessionAuth
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
 from api.v1.auth.basic_auth import BasicAuth
@@ -21,6 +22,8 @@ auth_type = getenv("AUTH_TYPE", "auth")
 
 if auth_type == "basic_auth":
     auth = BasicAuth()
+elif auth_type == "session_auth":
+    auth = SessionAuth()
 else:
     auth = Auth()
 
