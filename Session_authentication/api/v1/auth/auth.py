@@ -34,18 +34,6 @@ class Auth:
 
     def session_cookie(self, request=None) -> str:
         """ Session cookie value from request
-
-        Args:
-            request: The Flask request object.
-
-        Returns:
-            str: The value of the session cookie, or None if not found.
-
-        Notes:
-            - Uses .get() built-in for accessing the cookie
-            in the request cookies dictionary.
-            - The name of the cookie is defined by the environment
-            variable SESSION_NAME.
         """
         if request is None:
             return None
