@@ -2,11 +2,11 @@
 """T5
 """
 
-import uuid
 import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
+import uuid
 
 
 def _hash_password(password: str) -> bytes:
@@ -21,11 +21,10 @@ def _hash_password(password: str) -> bytes:
     return hash
 
 
-def _generate_uuid(self) -> str:
+def _generate_uuid() -> str:
     """Generate a new UUID
     """
-    new_uuid = uuid.uuid4()
-    return str(new_uuid)
+    return str(uuid.uuid4())
 
 
 class Auth:
