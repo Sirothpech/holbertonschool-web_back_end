@@ -16,6 +16,7 @@ def hello() -> str:
     """
     return jsonify({"message": "Bienvenue"})
 
+
 @app.route('/users', method=['POST'], strict_slashes=False)
 def reg_user() -> str:
     """Register user route
