@@ -42,8 +42,7 @@ class Auth:
         try:
             user = self._db.find_user_by(email=email)
             entered_password = password.encode('utf-8')
-            hashed_password = user.hashed_password.encode('utf-8')
 
-            return bcrypt.checkpw(entered_password, hashed_password)
+            return bcrypt.checkpw(entered_password, user.hashed_password)
         except NoResultFound:
             return False
