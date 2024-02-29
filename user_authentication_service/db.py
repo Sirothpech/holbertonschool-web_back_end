@@ -35,8 +35,6 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Add user to the database
         """
-        if not email or not hashed_password:
-            return None
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
         self._session.commit()
@@ -47,13 +45,11 @@ class DB:
         """
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
-            if user is None:
-                raise NoResultFound
-            return user
-        except NoResultFound:
-            raise NoResultFound("No user found.")
-        except InvalidRequestError:
-            raise InvalidRequestError("Invalid query parameters.")
+        except TypeError:
+            raise InvalidRequestError
+        if user is None:
+            raise NoResultFound
+        return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update user into the DB
