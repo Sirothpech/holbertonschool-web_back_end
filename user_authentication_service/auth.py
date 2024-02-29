@@ -31,6 +31,8 @@ class Auth:
     """
 
     def __init__(self):
+        """ Initializes a new instance of the class.
+        """
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
