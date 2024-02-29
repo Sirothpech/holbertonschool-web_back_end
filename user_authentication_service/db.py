@@ -50,8 +50,10 @@ class DB:
             if user is None:
                 raise NoResultFound
             return user
+        except NoResultFound:
+            raise NoResultFound("No user found.")
         except InvalidRequestError:
-            raise
+            raise InvalidRequestError("Invalid query parameters.")
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update user into the DB
