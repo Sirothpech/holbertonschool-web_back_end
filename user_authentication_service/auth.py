@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""T10 Get session ID
+"""Auth module
 """
-
 import bcrypt
 from db import DB
 from user import User
