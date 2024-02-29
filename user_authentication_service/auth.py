@@ -3,9 +3,9 @@
 """
 
 import bcrypt
-from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
+from sqlalchemy.orm.exc import NoResultFound
 import uuid
 
 
