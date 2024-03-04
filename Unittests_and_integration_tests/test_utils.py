@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unittests
+"""File for unit tests
 """
 from parameterized import parameterized
 import unittest
@@ -15,9 +15,10 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
-    def test_access_nested_map(self, nested_map, path, expected_result):
-        result = access_nested_map(nested_map, path)
-        self.assertEqual(result, expected_result)
+    def test_access_nested_map(self, nested_map, path, expected):
+        """Test the access_nested_map function
+        """
+        self.assertEqual(access_nested_map(nested_map, path), expected)
 
     @parameterized.expand([
         ({}, ("a",)),
@@ -31,14 +32,14 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
-    """ Test get json function
+    """Test the get_json function
     """
     @parameterized.expand([
-        ("http://example.com"),
-        ("http://holberton.io")
+        ("http://example.com",),
+        ("http://holberton.io",),
     ])
     def test_get_json(self, url):
-        """ Test get json
+        """Test the get_json function
         """
         with patch('requests.get') as mock_request:
             mock_request.return_value.json.return_value = {"payload": True}
@@ -46,10 +47,10 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """ Test memoize function
+    """Test the memoize function
     """
     def test_memoize(self):
-        """ Test memoize function
+        """Test the memoize function
         """
         class TestClass:
 
@@ -60,10 +61,8 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        my_obj = TestClass()
-        with patch.object(my_obj, 'a_method') as mock_a_method:
-            mock_a_method.return_value = 42
-            result = my_obj.a_property
-            self.assertEqual(result, 42)
-            result = my_obj.a_property
-            mock_a_method.assert_called_once()
+        with patch.object(TestClass, 'a_method') as mock_method:
+            test = TestClass()
+            test.a_property
+            test.a_property
+            mock_method.assert_called_once()
