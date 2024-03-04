@@ -49,7 +49,7 @@ class TestMemoize(unittest.TestCase):
     """ Test memoize function
     """
     def test_memoize(self):
-        """ Test memoize
+        """ Test memoize function
         """
         class TestClass:
 
