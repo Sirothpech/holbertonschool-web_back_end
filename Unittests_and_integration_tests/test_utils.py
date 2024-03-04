@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Unittests
 """
+from parameterized import parameterized
 import unittest
 from unittest.mock import patch, Mock
-from parameterized import parameterized
 from utils import access_nested_map, get_json, memoize
 
 
@@ -34,8 +34,8 @@ class TestGetJson(unittest.TestCase):
     """ Test get json function
     """
     @parameterized.expand([
-        ("http://example.com", {"payload": True}),
-        ("http://holberton.io", {"payload": False}),
+        ("http://example.com"),
+        ("http://holberton.io")
     ])
     def test_get_json(self, url):
         """ Test get json
