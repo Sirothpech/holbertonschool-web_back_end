@@ -15,9 +15,11 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
-    def test_access_nested_map(self, nested_map, path, expected_result):
+    def test_access_nested_map(self, nested_map, path, expected):
+        """Test the access_nested_map function
+        """
         result = access_nested_map(nested_map, path)
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, expected)
 
     @parameterized.expand([
         ({}, ("a",)),
@@ -31,14 +33,14 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
-    """ Test get json function
+    """Test get json function
     """
     @parameterized.expand([
-        ("http://example.com"),
-        ("http://holberton.io")
+        ("http://example.com",),
+        ("http://holberton.io",),
     ])
     def test_get_json(self, url):
-        """ Test get json
+        """Test get json function
         """
         with patch('requests.get') as mock_request:
             mock_request.return_value.json.return_value = {"payload": True}
@@ -46,10 +48,10 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """ Test memoize function
+    """Test the memoize function
     """
     def test_memoize(self):
-        """ Test memoize
+        """Test the memoize function
         """
         class TestClass:
 
