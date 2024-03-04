@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""File for unit tests
+"""Unittests
 """
 from parameterized import parameterized
 import unittest
@@ -15,10 +15,9 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
-    def test_access_nested_map(self, nested_map, path, expected):
-        """Test the access_nested_map function
-        """
-        self.assertEqual(access_nested_map(nested_map, path), expected)
+    def test_access_nested_map(self, nested_map, path, expected_result):
+        result = access_nested_map(nested_map, path)
+        self.assertEqual(result, expected_result)
 
     @parameterized.expand([
         ({}, ("a",)),
@@ -32,14 +31,14 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
-    """Test the get_json function
+    """ Test get json function
     """
     @parameterized.expand([
-        ("http://example.com",),
-        ("http://holberton.io",),
+        ("http://example.com"),
+        ("http://holberton.io")
     ])
     def test_get_json(self, url):
-        """Test the get_json function
+        """ Test get json
         """
         with patch('requests.get') as mock_request:
             mock_request.return_value.json.return_value = {"payload": True}
@@ -47,10 +46,10 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """Test the memoize function
+    """ Test memoize function
     """
     def test_memoize(self):
-        """Test the memoize function
+        """ Test memoize
         """
         class TestClass:
 
