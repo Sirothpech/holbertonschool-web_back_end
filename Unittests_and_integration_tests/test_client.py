@@ -10,11 +10,11 @@ from client import GithubOrgClient
 class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient class
     """
-    @patch('client.get_json')
     @parameterized.expand([
         ("google"),
         ("abc")
     ])
+    @patch('client.get_json')
     def test_org(self, org):
         """Test the org method
         """
