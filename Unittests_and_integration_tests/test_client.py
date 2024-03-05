@@ -87,10 +87,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """
         cls.get_patcher.stop()
 
-    @parameterized.expand([
-        ("example", ["repo1", "repo2"]),
-        ("test", ["repo3", "repo4"]),
-    ])
     def test_public_repos_integration(self):
         """Test the public_repos method in an integration test
         """
