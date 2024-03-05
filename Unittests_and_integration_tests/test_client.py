@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Test client
+"""Test client module
 """
 import unittest
-from unittest.mock import patch, PropertyMock
+from unittest.mock import patch, Mock, PropertyMock
 from parameterized import parameterized
 from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """Test Github
+    """TestGithubOrgClient class
     """
     @patch('client.get_json')
     @parameterized.expand([
@@ -16,7 +16,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc")
     ])
     def test_org(self, org):
-        """Test org method
+        """Test the org method
         """
         with patch('client.get_json') as mock_get_json:
             mock_get_json.return_value = {}
@@ -27,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(result, {})
 
     def test_public_repos_url(self):
-        """Test the _public_repos_url
+        """Test the _public_repos_url property
         """
         with patch("client.GithubOrgClient.org",
                    new_callable=PropertyMock) as mock_org:
@@ -38,7 +38,7 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(result, "https://example.com")
 
     def test_public_repos(self):
-        """Test the _public_repos method
+        """Test the public_repos method
         """
         with patch("client.GithubOrgClient._public_repos_url",
                    new_callable=PropertyMock) as mock_org:
