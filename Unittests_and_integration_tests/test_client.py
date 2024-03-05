@@ -81,12 +81,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             Mock(json=lambda: cls.repos_payload),
         ]
 
-    @classmethod
-    def tearDownClass(cls):
-        """Tear down class method
-        """
-        cls.get_patcher.stop()
-
     @parameterized.expand([
         ("example", ["repo1", "repo2"]),
         ("test", ["repo3", "repo4"]),
@@ -100,8 +94,15 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_public_repos_with_license_integration(self):
-        """Test the public_repos method with license in an integration test"""
-        github_client = GithubOrgClient('google')
+        """Test the public_repos method with license in an integration test
+        """
+        github_client = GithubOrgClient("google")
         result = github_client.public_repos("apache-2.0")
 
         self.assertEqual(result, self.apache2_repos)
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down class method
+        """
+        cls.get_patcher.stop()
