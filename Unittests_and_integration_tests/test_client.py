@@ -23,5 +23,5 @@ class GithubOrgClient(unittest.TestCase):
 
             github_client = GithubOrgClient(org)
             result = github_client.org
-            self.assertEqual(result, {})
             mock_get_json.assert_called_once()
+            self.assertEqual(result, {})
