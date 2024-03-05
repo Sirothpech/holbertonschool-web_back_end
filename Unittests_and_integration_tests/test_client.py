@@ -2,7 +2,7 @@
 """Test client
 """
 import unittest
-from unittest.mock import patch
+from unittest.mock import PropertyMock, patch
 from parameterized import parameterized
 from client import GithubOrgClient
 
@@ -25,3 +25,14 @@ class TestGithubOrgClient(unittest.TestCase):
             result = github_client.org
             mock_get_json.assert_called_once()
             self.assertEqual(result, {})
+
+    def test_public_repos_url(self):
+        """Test the _public_repos_url
+        """
+        with patch("client.GithubOrgClient.org",
+                   new_callable=PropertyMock) as mock_org:
+
+            mock_org.return_value = {"https://example.com"}
+            github_client = GithubOrgClient("example")
+            result = github_client.org
+            self.assertEqual(result, "https://example.com")
