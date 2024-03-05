@@ -94,7 +94,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """
         cls.get_patcher.stop()
 
-    def test_public_repos_integration(self):
+    def test_public_repos(self):
         """Test the public_repos method in an integration test
         """
         github_client = GithubOrgClient("google")
@@ -102,7 +102,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         self.assertEqual(result, self.expected_repos)
 
-    def test_public_repos_with_license_integration(self):
+    def test_public_repos_with_license(self):
         """Test the public_repos method with license in an integration test
         """
         github_client = GithubOrgClient("google")
