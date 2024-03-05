@@ -84,6 +84,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock_get.side_effect = [
             cls.mock_response_org,
             cls.mock_response_repos,
+            cls.mock_response_org,
+            cls.mock_response_repos,
         ]
 
     @classmethod
