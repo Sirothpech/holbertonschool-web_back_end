@@ -69,16 +69,36 @@ class TestGithubOrgClient(unittest.TestCase):
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """TestTestIntegrationGithubOrgClient class
     """
+    # @classmethod
+    # def setUpClass(cls):
+    #     """Set up class method
+    #     """
+    #     cls.get_patcher = patch('requests.get')
+
+    #     cls.mock_get = cls.get_patcher.start()
+    #     cls.mock_get.side_effect = [
+    #         Mock(json=lambda: cls.org_payload),
+    #         Mock(json=lambda: cls.repos_payload),
+    #     ]
     @classmethod
     def setUpClass(cls):
-        """Set up class method
-        """
+        """Set up class method"""
         cls.get_patcher = patch('requests.get')
-
         cls.mock_get = cls.get_patcher.start()
+
+        # Créer des objets Mock pour les réponses JSON de
+        # l'organisation et des dépôts
+        cls.mock_response_org = Mock()
+        cls.mock_response_repos = Mock()
+
+        # Configurer la méthode json des objets Mock avec les valeurs attendues
+        cls.mock_response_org.json.return_value = cls.org_payload
+        cls.mock_response_repos.json.return_value = cls.repos_payload
+
+        # Configurer le side_effect avec les objets Mock
         cls.mock_get.side_effect = [
-            Mock(json=lambda: cls.org_payload),
-            Mock(json=lambda: cls.repos_payload),
+            cls.mock_response_org,
+            cls.mock_response_repos,
         ]
 
     @classmethod
