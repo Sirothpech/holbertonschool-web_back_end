@@ -7,3 +7,4 @@
 ## Session authentication
 ## User_authentication_service
 ## Unittests and Integration Tests
+## i18n
