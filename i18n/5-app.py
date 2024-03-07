@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Route API
 """
+from typing import Dict
 from flask import Flask, g, render_template, request
 from flask_babel import Babel
 
@@ -36,7 +37,7 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user():
+def get_user() -> Dict:
     """Finds a user if any, and set it as a global on flask.g.user
     """
     user_id = int(request.args.get('login_as'))
