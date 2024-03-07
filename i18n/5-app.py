@@ -61,7 +61,11 @@ def before_request():
 def index():
     """index.html
     """
-    return render_template('5-index.html')
+    try:
+        username = g.user['name']
+    except Exception:
+        username = None
+    return render_template('5-index.html', username=username)
 
 
 if __name__ == '__main__':
