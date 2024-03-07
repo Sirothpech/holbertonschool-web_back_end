@@ -42,7 +42,7 @@ def get_user() -> Dict:
     """
     try:
         user_id = int(request.args.get('login_as'))
-        if user_id in users.keys:
+        if user_id in users.keys():
             return users[user_id]
     except Exception:
         return None
