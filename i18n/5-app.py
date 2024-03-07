@@ -27,7 +27,7 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
-    """Get locale
+    """Returns a user dictionary or None based on the ID
     """
     lang = app.config['LANGUAGES']
 
@@ -37,9 +37,9 @@ def get_locale():
 
 
 def get_user():
-    """Get user
+    """Finds a user if any, and set it as a global on flask.g.user
     """
-    user_id = int(request.args['login_as'])
+    user_id = int(request.args.get('login_as'))
     try:
         if user_id in users.keys:
             return users[user_id]
