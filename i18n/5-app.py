@@ -35,6 +35,7 @@ def get_locale():
         return request.args['locale']
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 def get_user():
     """Get user
     """
@@ -44,6 +45,7 @@ def get_user():
             return users[user_id]
     except Exception:
         return None
+
 
 @app.before_request
 def before_request():
