@@ -40,8 +40,8 @@ def get_locale():
 def get_user() -> Dict:
     """Finds a user if any, and set it as a global on flask.g.user
     """
-    user_id = int(request.args.get('login_as'))
     try:
+        user_id = int(request.args.get('login_as'))
         if user_id in users.keys:
             return users[user_id]
     except Exception:
