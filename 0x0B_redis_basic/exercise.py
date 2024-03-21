@@ -8,6 +8,7 @@ import uuid
 
 
 class Cache:
+    """Cache class to store data in Redis"""
     def __init__(self) -> None:
         """Initialization"""
         self._redis = redis.Redis()
