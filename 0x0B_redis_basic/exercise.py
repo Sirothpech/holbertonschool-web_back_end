@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""3. Storing lists
+"""4. Retrieving lists
 """
 
 from functools import wraps
@@ -30,6 +30,23 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(f"{method.__qualname__}:outputs", str(result))
         return result
     return wrapper
+
+def replay(method: Callable) -> None:
+    """Display the history of calls of a particular function"""
+
+    name = method.__qualname__
+    r = redis.Redis()
+
+    inputs = method.__qualname__ + ':inputs'
+    outputs = method.__qualname__ + ':outputs'
+
+    inputs_list = r.lrange(inputs, 0, -1)
+    outputs_list = r.lrange(outputs, 0, -1)
+
+    print(f"{name} was called {len(inputs_list)} times:")
+
+    for i, o in zip(inputs_list, outputs_list):
+        print(f"{name}(*{i.decode('utf-8')}) -> {o.decode('utf-8')}")
 
 class Cache:
     """Cache class to store data in Redis"""
