@@ -88,3 +88,14 @@ class Cache:
     def get_int(self, data: bytes) -> int:
         """Convert bytes to int"""
         return int.from_bytes(data, byteorder='big')
+
+# Create a Cache instance
+cache = Cache()
+
+# Store some function calls
+cache.store("foo")
+cache.store("bar")
+cache.store(42)
+
+# Call replay function with cache.store as argument
+replay(cache.store)
