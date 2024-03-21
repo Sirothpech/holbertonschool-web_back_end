@@ -1,11 +1,35 @@
 #!/usr/bin/env python3
-"""1. Reading from Redis and recovering original type
+"""2. Incrementing values
 """
 
+from functools import wraps
 from typing import Callable, Optional, Union
 import redis
 import uuid
 
+
+def count_calls(method: Callable) -> Callable:
+    """Decorator that counts how many times a function is called."""
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """Wrapper function"""
+        self._redis.incr(method.__qualname__)
+        return method(self, *args, **kwargs)
+    return wrapper
+
+
+def call_history(method: Callable) -> Callable:
+    """Decorator that store the history of inputs and outputs for a function"""
+
+    @wraps(method)
+    def wrapper(self, *args):
+        """Wrapper function"""
+        self._redis.rpush(f"{method.__qualname__}:inputs", str(args))
+        result = method(self, *args)
+        self._redis.rpush(f"{method.__qualname__}:outputs", str(result))
+        return result
+    return wrapper
 
 class Cache:
     """Cache class to store data in Redis"""
@@ -16,6 +40,14 @@ class Cache:
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Stores the input data in Redis"""
+        key = str(uuid.uuid4())
+        self._redis.set(key, data)
+        return key
+
+    @count_calls
+    @call_history
+    def store(self, data: Union[str, bytes, int, float]) -> str:
+        """Store data in redis database"""
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
