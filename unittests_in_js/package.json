@@ -4,6 +4,7 @@
     "mocha": "^10.3.0",
     "sinon": "^17.0.1"
   },
+  "type": "commonjs",
   "scripts": {
     "test": "mocha"
   }
