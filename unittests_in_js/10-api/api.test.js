@@ -79,13 +79,7 @@ describe('/available_payments endpoint', () => {
 
     it('Checks the body', (done) => {
         request(url, (error, response, body) => {
-            const responseBody = JSON.parse(body);
-            expect(responseBody).to.deep.equal({
-                payment_methods: {
-                    credit_cards: true,
-                    paypal: false
-                }
-            });
+            expect(body).to.deep.equal('{"payment_methods":{"credit_cards":true,"paypal":false}}');
             done();
         });
     });
