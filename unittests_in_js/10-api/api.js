@@ -3,8 +3,6 @@ const bodyParser = require('body-parser'); // Import du middleware Body Parser
 const port = 7865;
 const app = express();
 
-app.use(bodyParser.json()); // Utilisation du middleware Body Parser pour parser les données JSON
-
 app.get('/', (req, res) => {
     res.send('Welcome to the payment system');
 });
@@ -28,6 +26,9 @@ app.get('/available_payments', (req, res) => {
         }
     )
 });
+
+app.use(bodyParser.json()); // Utilisation du middleware Body Parser pour parser les données JSON
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/login', (req, res) => {
     const { userName } = req.body;
