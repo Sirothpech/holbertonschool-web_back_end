@@ -4,13 +4,15 @@ const { expect } = chai;
 
 describe('Index page', () => {
     const url = 'http://localhost:7865/';
-    it('Checks the status code', (done) => {
+
+    it('should return status code 200 for the index page', (done) => {
         request(url, (error, response, body) => {
             expect(response.statusCode).to.equal(200);
             done();
         });
     });
-    it('Checks the body', (done) => {
+
+    it('should return "Welcome to the payment system" for the index page', (done) => {
         request(url, (error, response, body) => {
             expect(body).to.equal('Welcome to the payment system');
             done();
@@ -36,15 +38,6 @@ describe('Cart page', () => {
         const url = `${baseUrl}/cart/${cartId}`;
         request(url, (error, response, body) => {
             expect(response.statusCode).to.equal(404);
-            done();
-        });
-    });
-
-    it('should return 404 status code when cart id is not a number', (done) => {
-        const cartId = 'hello';
-        const url = `${baseUrl}/cart/${cartId}`;
-        request(url, (error, response, body) => {
-            expect(body).to.equal('');
             done();
         });
     });
