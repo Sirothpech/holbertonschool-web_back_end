@@ -1,4 +1,4 @@
-export default function createPushNotificationJobs(jobs, queue) {
+export default function createPushNotificationsJobs(jobs, queue) {
     if(!(jobs instanceof Array)) {
         throw Error('Jobs is not an array')
     };
